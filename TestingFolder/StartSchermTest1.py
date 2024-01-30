@@ -13,6 +13,7 @@ pygame.display.set_caption("Interactive Window")
 WHITE = (255, 255, 255)
 GREY = (200, 200, 200)
 BLACK = (0, 0, 0)
+GREEN = (10, 110, 20)
 
 # Set up fonts
 font = pygame.font.Font(None, 36)
@@ -37,7 +38,7 @@ def button_PAO():
 def button_HELP():
     return "Kies hier je welke positie je bent. \n Als je in de shuttle zit ben je Commander of Pilot, \n als je buiten de shuttel zit ben je èèn van de andere rollen."
 def button_START():
-    return None
+    return True
 
 # Define button rectangles
 commander_button_rect = None
@@ -157,6 +158,9 @@ def main():
             chosen_label = font.render(role_chosen, True, BLACK)
             chosen_label_rect = chosen_label.get_rect(center=(WIDTH // 2, HEIGHT * 2.5 // 4))
             screen.blit(chosen_label, chosen_label_rect)
+        
+        if start_missie:
+            screen.fill(GREEN) #is om knop te testen 
 
         # Update the display
         pygame.display.flip()
