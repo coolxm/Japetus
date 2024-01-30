@@ -35,7 +35,9 @@ def button_SSO():
 def button_PAO():
     return "Public Affairs Officer gekozen! (PAO)"
 def button_HELP():
-    return "Help uitleg:"
+    return "Kies hier je welke positie je bent. \n Als je in de shuttle zit ben je Commander of Pilot, \n als je buiten de shuttel zit ben je èèn van de andere rollen."
+def button_START():
+    return None
 
 # Define button rectangles
 commander_button_rect = None
@@ -47,11 +49,13 @@ ELSS_button_rect = None
 SSO_button_rect = None
 PAO_button_rect = None
 HELP_button_rect = None
+START_button_rect = None
 
 # Main loop
 def main():
-    global commander_button_rect, pilot_button_rect, FD_button_rect
+    #global commander_button_rect, pilot_button_rect, FD_button_rect
     role_chosen = None
+    start_missie = None
 
     while True:
         for event in pygame.event.get():
@@ -79,6 +83,9 @@ def main():
                     role_chosen = button_PAO()
                 elif HELP_button_rect.collidepoint(mouse_pos):
                     role_chosen = button_HELP()
+                elif START_button_rect.collidepoint(mouse_pos):
+                    if not role_chosen == (None or button_HELP)():
+                        start_missie = button_START()
 
         # Clear the screen
         screen.fill(GREY)
@@ -139,11 +146,16 @@ def main():
         pygame.draw.rect(screen, BLACK, HELP_button_rect, 2)  # Draw box around button
         screen.blit(HELP_button, HELP_button_rect.move((HELP_button_rect.width - HELP_button.get_width()) // 2, (HELP_button_rect.height - HELP_button.get_height()) // 2))
 
+        START_button = font.render("Start Missie", True, BLACK)
+        START_button_rect = pygame.Rect((WIDTH * 5 // 6 - button_width // 2, HEIGHT * 7 // 8 - button_height // 2), (button_width, button_height))
+        pygame.draw.rect(screen, BLACK, START_button_rect, 2)  # Draw box around button
+        screen.blit(START_button, START_button_rect.move((START_button_rect.width - START_button.get_width()) // 2, (START_button_rect.height - START_button.get_height()) // 2))
+
 
         # Draw chosen role
         if role_chosen:
             chosen_label = font.render(role_chosen, True, BLACK)
-            chosen_label_rect = chosen_label.get_rect(center=(WIDTH // 2, HEIGHT * 3 // 4))
+            chosen_label_rect = chosen_label.get_rect(center=(WIDTH // 2, HEIGHT * 2.5 // 4))
             screen.blit(chosen_label, chosen_label_rect)
 
         # Update the display
