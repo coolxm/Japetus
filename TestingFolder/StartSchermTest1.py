@@ -89,7 +89,10 @@ def main():
                         start_missie = button_START()
 
         # Clear the screen
-        screen.fill(GREY)
+        if start_missie:
+            screen.fill(GREEN) #is om startknop te testen 
+        else:
+            screen.fill(GREY)
 
         # Draw text above buttons
         text = font.render("Kies hier uw rol:", True, BLACK)
@@ -159,9 +162,7 @@ def main():
             chosen_label_rect = chosen_label.get_rect(center=(WIDTH // 2, HEIGHT * 2.5 // 4))
             screen.blit(chosen_label, chosen_label_rect)
         
-        if start_missie:
-            screen.fill(GREEN) #is om knop te testen 
-
+        
         # Update the display
         pygame.display.flip()
 
