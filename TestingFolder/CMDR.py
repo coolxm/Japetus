@@ -86,6 +86,8 @@ def CMDR_prog():
             return "Response 1: Code 123 processed."
         elif code == '456':
             return "Response 2: Code 456 processed."
+        elif code == 'stop':
+            sys.exit(1)
         else:
             return "Invalid code. Please try again."
 
