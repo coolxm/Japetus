@@ -92,3 +92,6 @@ def CMDR_prog():
             return "Invalid code. Please try again."
 
     CMDR_main()
+
+if __name__ == '__main__':
+    CMDR_prog()
