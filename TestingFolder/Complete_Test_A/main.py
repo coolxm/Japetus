@@ -1,5 +1,6 @@
 #import modules
 import StartSchermTest1
+import Main_Scherm
 import CMDR
 import PLT
 import FD
@@ -11,8 +12,10 @@ rol = None
 rol = StartSchermTest1.Startscherm_prog()
 print(rol)
 
-#run verschillende rollen
+Main_Scherm.MainScherm_prog(rol)
 
+#run verschillende rollen
+rol = None #tijdelijk dit uitschakelen
 if rol == "CMDR":
     CMDR.CMDR_prog()
 elif rol == "PLT":
