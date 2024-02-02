@@ -1,6 +1,8 @@
 #import modules
 import StartSchermTest1
 import CMDR
+import PLT
+import FD
 
 #variabelen
 rol = None
@@ -14,9 +16,9 @@ print(rol)
 if rol == "CMDR":
     CMDR.CMDR_prog()
 elif rol == "PLT":
-    print("pilot programma")
+    PLT.PLT_prog()
 elif rol == "FD":
-    print("flight director programma")
+    FD.FD_prog()
 elif rol == "WXT":
     print("weermand programma")
 elif rol == "LD":

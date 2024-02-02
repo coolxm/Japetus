@@ -13,7 +13,9 @@ def CMDR_prog():
 
     # Set up colors
     WHITE = (255, 255, 255)
-    GREY = (200, 200, 200)
+    GREEN = (29, 161, 33)
+    LGREY = (200, 200, 200)
+    GREY = (20, 20, 20)
     BLACK = (0, 0, 0)
     # Set up fonts
     font = pygame.font.Font(None, 36)
@@ -27,10 +29,17 @@ def CMDR_prog():
     text = ''
     response = ''
 
+    # Define button
+    def button_fuel():
+        return "Fuel scherm gevraagd"
+    # Define button rectangles
+    fuel_button_rect = None
+
     # Main loop
     def CMDR_main():
         nonlocal active, text, response, color
         running = True
+        button_clicked = None
 
         while running:
             for event in pygame.event.get():
@@ -60,21 +69,35 @@ def CMDR_prog():
                             text = text[:-1]
                         else:
                             text += event.unicode
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    if fuel_button_rect.collidepoint(mouse_pos):
+                        button_clicked = button_fuel()
             
             # Clear the screen
             screen.fill(GREY)
 
             # Render text input box
             pygame.draw.rect(screen, color, input_box, 2)
-            txt_surface = font.render(text, True, BLACK)
+            txt_surface = font.render(text, True, LGREY)
             width = max(200, txt_surface.get_width()+10)
             input_box.w = width
             screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
-            pygame.draw.rect(screen, BLACK, input_box, 2)
+            pygame.draw.rect(screen, LGREY, input_box, 2)
 
             # Render response
-            response_text = font.render(response, True, BLACK)
+            response_text = font.render(response, True, GREEN)
             screen.blit(response_text, (100, 200))
+
+            # Draw buttons with larger boxes
+            button_width, button_height = 200, 50
+            #Fuel Knop
+            fuel_button = font.render("Fuel", True, GREEN)
+            fuel_button_rect = pygame.Rect((WIDTH * 5.5 // 6 - button_width // 2, HEIGHT // 8 - button_height // 2), (button_width, button_height))
+            pygame.draw.rect(screen, GREEN, fuel_button_rect, 2)  # Draw box around button
+            screen.blit(fuel_button, fuel_button_rect.move((fuel_button_rect.width - fuel_button.get_width()) // 2, (fuel_button_rect.height - fuel_button.get_height()) // 2))
+
 
             # Update the display
             pygame.display.flip()
